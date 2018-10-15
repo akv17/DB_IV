@@ -1,0 +1,50 @@
+<html>
+    <style>
+        .output_window {line-height: 5px;}
+    </style>
+    <body>
+        <div class="output_window">
+            <p>{{ report_message }}</p>
+            <ol>
+            {% for record in response %}
+                <li id="record_{{ loop.index }}">
+                    <p style="font-weight: bold;">{{ record['Name'] }}</p>
+                    {% for key in record %}
+                        {% if key != 'Name' %}
+                            <p id="{{ active_menu_id }}_{{ record['id'] }}_{{ key }}"><span style="font-style: italic;">{{ key }}</span>: {{ record[key] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if active_menu_id != 'employees' %}
+                        <form class="assign_form" method="POST" style="display: inline-block">
+                            <input type="text" name="{{ active_menu_id }}_assign" style="display: none">
+                            <input type="text" name="record_id" value="{{ record['id'] }}" style="display: none">
+                            <input type="text" name="assigned_id" style="display: none">
+                            <input type="submit" value="Assign">
+                        </form>
+
+                        <form class="cancel_form" method="POST" style="display: inline-block">
+                            <input type="text" name="{{ active_menu_id }}_cancel" style="display: none">
+                            <input type="text" name="record_id" value="{{ record['id'] }}" style="display: none">
+                            <input type="text" name="prev_assigned_id" style="display: none">
+                            <input type="submit" value="Cancel">
+                        </form>
+                    {% endif %}
+                    
+                    <form class="remove_form" method="POST" style="display: inline-block">
+                        <input type="text" name="{{ active_menu_id }}_remove" style="display: none">
+                        <input type="text" name="remove_id" value="{{ record['id'] }}" style="display: none">
+                        <input type="submit" value="Remove">
+                    </form>
+                    
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
+    </body>
+    <script>
+        let activeMenuId = "{{ active_menu_id }}";
+        let outputWindow = document.querySelector(".output_window");
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scriptSearchManage.js') }}"></script>
+</html>

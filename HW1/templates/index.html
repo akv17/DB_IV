@@ -1,0 +1,108 @@
+<html>
+    <style>
+            input {display: inline-block;}
+            label {display: inline-block; text-align: left; width: 100px; margin-bottom: 5px;}
+            .menu_button {display: inline-block; margin-bottom: 10px;}
+            .sub_menu_button {display: inline-block; margin-bottom: 10px;}
+            .output_window {line-height: 5px;}
+        </style>
+    <body>
+        <h1>Freelancing DB</h1>
+        <p style="font-size: 12px; font-style: italic;">Apply changes made during session via 'Commit Changes' button.</p>
+        <div class="commit_menu">
+            <form method="POST" class="commit_form">
+                <input type="text"name="apply_commit" value="True" style="display: none">
+                <input type="submit" value="Commit Changes">
+            </form>
+        </div>
+
+        <div class="menu">
+            <button class="menu_button" id="projects">Manage Projects</button>
+            <button class="menu_button" id="freelancers">Manage Freelancers</button>
+            <button class="menu_button" id="employees">Manage Employees</button>
+        </div>
+
+
+        <div class="sub_menu" style="display: none">
+            <button class="sub_menu_button" id="search_manage" onclick="activateSubMenu('search_manage');">Search/Manage</button>
+            <button class="sub_menu_button" id="write" onclick="activateSubMenu('write');">Write</button>
+            <form "{{ url_for('search_manage') }}" target="_blank" method="GET" class="sub_menu_button" id="fetch_all">
+                <input type="text" value="True" style="display: none"><br>
+                <input type="submit" value="Fetch All">
+            </form>
+        </div>
+
+        <div class="forms_block" style="display: none">
+            <form action="{{ url_for('search_manage') }}" target="_blank" method="GET" class="search_manage_form"  id="projects_search_manage_form" style="display: none">
+                <input type="text" style="display: none"><br>
+                <label>Name:</label><input type="text" name="Name"><br>
+                <label>Wage:</label><input type="text" name="Wage"><br>
+                <label>Field:</label><input type="text" name="Field"><br>
+                <label>Requirements:</label><input type="text" name="Requirements"><br>
+                <label>Description:</label><input type="text" name="Description"><br>
+                <label>Due:</label><input type="text" name="Due"><br>
+                <label>EmployeeId:</label><input type="text" name="EmployeeId"><br>
+                <label>FreelancerId:</label><input type="text" name="FreelancerId"><br>
+                <label>id:</label><input type="text" name="ID"><br>
+                <input type="submit" value="Search">
+            </form>
+
+            <form method="POST" class="write_form"  id="projects_write_form" style="display: none">
+                <input type="text" style="display: none"><br>
+                <label>Name:</label><input type="text" name="Name"><br>
+                <label>Wage:</label><input type="text" name="Wage"><br>
+                <label>Field:</label><input type="text" name="Field"><br>
+                <label>Requirements:</label><input type="text" name="Requirements"><br>
+                <label>Description:</label><input type="text" name="Description"><br>
+                <label>Due:</label><input type="text" name="Due"><br>
+                <label>EmployeeId:</label><input type="text" name="EmployeeId"><br>
+                <label>FreelancerId:</label><input type="text" name="FreelancerId"><br>
+                <input type="submit" value="Write">
+            </form>
+
+            <form action="{{ url_for('search_manage') }}" target="_blank" method="GET" class="search_manage_form"  id="freelancers_search_manage_form" style="display: none">
+                <input type="text" style="display: none"><br>
+                <label>Name:</label><input type="text" name="Name"><br>
+                <label>Field:</label><input type="text" name="Field"><br>
+                <label>Skills:</label><input type="text" name="Skills"><br>
+                <label>Experience:</label><input type="text" name="Experience"><br>
+                <label>ProjectId:</label><input type="text" name="ProjectId"><br>
+                <label>id:</label><input type="text" name="ID"><br>
+                <input type="submit" value="Search">
+            </form>
+
+            <form method="POST" class="write_form"  id="freelancers_write_form" style="display: none">
+                <input type="text" style="display: none"><br>
+                <label>Name:</label><input type="text" name="Name"><br>
+                <label>Field:</label><input type="text" name="Field"><br>
+                <label>Skills:</label><input type="text" name="Skills"><br>
+                <label>Experience:</label><input type="text" name="Experience"><br>
+                <label>ProjectId:</label><input type="text" name="ProjectId"><br>
+                <input type="submit" value="Write">
+            </form>
+            
+            <form action="{{ url_for('search_manage') }}" target="_blank" method="GET" class="search_manage_form"  id="employees_search_manage_form" style="display: none">
+                <input type="text" style="display: none"><br>
+                <label>Name:</label><input type="text" name="Name"><br>
+                <label>Field:</label><input type="text" name="Field"><br>
+                <label>ProjectId:</label><input type="text" name="ProjectId"><br>
+                <label>id:</label><input type="text" name="ID"><br>
+                <input type="submit" value="Search">
+            </form>
+
+            <form method="POST" class="write_form"  id="employees_write_form" style="display: none">
+                <input type="text" style="display: none"><br>
+                <label>Name:</label><input type="text" name="Name"><br>
+                <label>Field:</label><input type="text" name="Field"><br>
+                <label>ProjectId:</label><input type="text" name="ProjectId"><br>
+                <input type="submit" value="Write">
+            </form>
+        </div>
+        <p id="report_message">{{ report_message }}</p>
+    </body>
+    <script>
+        let activeMenuId = "{{ active_menu_id }}";
+        let activeSubMenuId = "{{ active_sub_menu_id }}";
+    </script>    
+    <script type="text/javascript" src="{{ url_for('static', filename='scriptIndex.js') }}"></script>
+</html>
