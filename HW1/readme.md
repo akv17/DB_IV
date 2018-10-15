@@ -1,8 +1,11 @@
 Структура БД:
+<br>
 Сущности:
 - Проект (таблица Projects)
 - Фрилансер (таблица Freelancers)
 - Работодатель (таблица Employees)
+<br>
+
 Отношения:
 - Проект <> Фрилансер (Projects.FreelancerId <> Freelancers.ProjectId)
 - Проект <> Работодатель (Projects.EmployeeId  <> Employees.ProjectId)
