@@ -1,14 +1,13 @@
 Структура БД:
-  Сущности:
-    - Проект (таблица Projects)
-    - Фрилансер (таблица Freelancers)
-    - Работодатель (таблица Employees)
-    
-  Отношения:
-    - Проект <> Фрилансер (Projects.FreelancerId <> Freelancers.ProjectId)
-    - Проект <> Работодатель (Projects.EmployeeId  <> Employees.ProjectId)
+Сущности:
+- Проект (таблица Projects)
+- Фрилансер (таблица Freelancers)
+- Работодатель (таблица Employees)
+Отношения:
+- Проект <> Фрилансер (Projects.FreelancerId <> Freelancers.ProjectId)
+- Проект <> Работодатель (Projects.EmployeeId  <> Employees.ProjectId)
  
-Интерфейс оперирования БД реализован в `db.py`.
+Интерфейс работы с БД реализован в `db.py`.
 
 Пользовательский интерфейс реализован как локальное flask-приложение `flask_app.py` и включает следующие возможности:
 - Поиск по всем типам сущностей (включая использование логических выражений и LIKE-синтаксиса)
