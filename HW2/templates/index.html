@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+    </head>
+    <style>
+        input {margin: 2px;}
+        label {width: 120px; display: inline-block;}
+        #dropdown {margin: 5px;}
+    </style>
+    <body>
+        <h1>ChatDB</h1>
+
+        <form method="POST">
+            <input type="text" name="op" value="commit" style="display: none;">
+            <input type="submit" value="Commit Changes">
+        </form>
+        <br>
+
+        <div class="op_menu">
+            <button class="select">SELECT</button>
+            <button class="write">WRITE</button>
+        </div>
+        
+        <form class="sql_table_selector" style="display: none;">
+            <select id="dropdown">
+                <option value="msg">Messages</option>
+                <option value="usr">Users</option>
+            </select>
+        </form>
+        
+        <form action="{{ url_for('select') }}" class="msg_select" target="_blank" style="display: none;">
+            <button type="button" class="cols_selector_trigger">Select columns to fetch</button>
+            <div class="cols_selector" id="msg_select_cols_selector" style="display: none;">
+                <p class="p_checkbox"><input type="checkbox" name="col_Id" checked>MessageId</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_Content" checked>Content</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_Date" checked>Date</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_SenderId" checked>SenderId</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_SenderNick" checked>SenderNick</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_SenderName" checked>SenderName</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_RecipientId" checked>RecipientId</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_RecipientNick" checked>RecipientNick</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_RecipientName" checked>RecipientName</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_RecipientActive" checked>RecipientActive</p>
+            </div><br>
+
+            <input type='text' name='op' value="msg_select" style="display: none;">
+            <label>Message Id: </label><input type="text" name="_id"><br>
+            <label>Sender Id: </label><input type="text" name="from_id"><br>
+            <label>Recipient Id: </label><input type="text" name="to_id"><br>
+            <label>Sender Nick: </label><input type="text" name="from_nick"><br>
+            <label>Recipient Nick: </label><input type="text" name="to_nick"><br>
+            <label>Sender Name: </label><input type="text" name="from_name"><br>
+            <label>Recipient Name: </label><input type="text" name="to_name"><br>
+            <label>Recipient Active: </label><input type="text" name="to_active"><br>
+            <label>Content: </label><input type="text" name="content"><br>
+            <label>From Date : </label><input type="text" name="from_date"><br>
+            <label>To Date : </label><input type="text" name="to_date"><br>
+
+            <input type="submit" value="Select">
+        </form>
+        
+        <form method="PUT" class="msg_write" style="display: none;">
+            <input type='text' name='op' value="msg_write" style="display: none;">
+            <label>Sender Id: </label><input type='text' name='usr_id_from'><br>
+            <label>Recipient Id: </label><input type='text' name='usr_id_to'><br>
+            <label>Content: </label><input type='text' name='content'><br>
+            <label>Date: </label><input type='text' name='date'><br>
+
+            <input type="submit" value="Write">
+        </form>
+        
+        <form action="{{ url_for('select') }}" class="usr_select" target="_blank" style="display: none;">
+            <button type="button" class="cols_selector_trigger">Select columns to fetch</button>
+            <div class="cols_selector" id="usr_select_cols_selector" style="display: none;">
+                <p class="p_checkbox"><input type="checkbox" name="col_Id" checked>Id</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_Nick" checked>Nick</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_Name" checked>Name</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_Bio" checked>Bio</p>
+                <p class="p_checkbox"><input type="checkbox" name="col_Active" checked>Active</p>
+            </div><br>
+
+            <input type='text' name='op' value="usr_select" style="display: none;">
+            <label>Id: </label><input type="text" name="_id"><br>
+            <label>Nick: </label><input type="text" name="nick"><br>
+            <label>Name: </label><input type="text" name="name"><br>
+            <label>Bio: </label><input type="text" name="bio"><br>
+            <label>Active: </label><input type="text" name="active" value="1"><br>
+            
+            <input type="submit" value="Select">
+        </form>
+        
+        <form method="PUT" class="usr_write" style="display: none;">
+            <input type='text' name='op' value="usr_write" style="display: none;">
+            <label>Nick: </label><input type="text" name="nick"><br>
+            <label>Name: </label><input type="text" name="name"><br>
+            <label>Bio: </label><input type="text" name="bio"><br>
+            
+            <input type="submit" value="Write">
+        </form>
+        <p class="status_log">{{ status_log }}</p>
+    </body>
+    <script type="text/javascript" src="../static/index_script.js"></script>
+</html>

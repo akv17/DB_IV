@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SELECT</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .submit_button {
+            font-size: 10px;
+            padding: 1px;
+            border-radius: 6px;
+        }
+    </style>
+    <body>
+        <p>Fetched {{ response|length }} record(s).</p>
+        {% if not response %}
+            <p>Nothing found.</p>
+        {% else %}
+            <table class="results_table">
+                <tr id="header">
+                    <th>№</th>
+                    {% for col_name in col_names %}
+                        <th>{{ col_name }}</th>    
+                    {% endfor %}
+                    <th>Mod</th>
+                </tr>
+
+                {% for record in response %}
+                    <tr id="{{ record['Id'] }}">
+                        <td>{{ loop.index }}</td>
+                        {% for col_name in col_names %}
+                            <td>{{ record[col_name] }}</td>
+                        {% endfor %}
+                        <td>
+                            <form method="POST" class="del_form">
+                                <input type="text" name="op" value="{{ '%s_%s' % (op.split('_')[0], 'delete') }}" style="display: none;">
+                                <input type="text" name="_id" value="{{ record['Id'] }}" style="display: none;">
+                                <input class="submit_button" type="submit" value="Delete">
+                            </form>
+
+                            {% if 'usr' in op %}
+                                <form method="POST" class="upd_form" action="{{ url_for('usr_update') }}" target="_blank">
+                                    <input type="text" name="op" value="{{ '%s_%s' % (op.split('_')[0], 'update') }}" style="display: none;">
+                                    <input type="text" name="_id" value="{{ record['Id'] }}" style="display: none;">
+                                    <input class="submit_button" type="submit" value="Update">
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </body>
+</html>

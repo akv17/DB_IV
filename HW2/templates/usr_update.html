@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>UPDATE</title>
+    </head>
+    <body>
+        <form method="POST">
+            <input type="text" name="op" value="{{ op }}" style="display: none;"><br>
+            <input type="text" name="usr_id" value="{{ _id }}" style="display: none;"><br>
+            <label>Nick: </label><input type="text" name="usr_nick"><br>
+            <label>Name: </label><input type="text" name="usr_name"><br>
+            <label>Bio: </label><input type="text" name="usr_bio"><br>
+            <label>Active: </label><input type="text" name="usr_active"><br>
+
+            <input type="submit" value="Update">
+        </form>
+        <p>{{ status_log }}</p>
+    </body>
+</html>
